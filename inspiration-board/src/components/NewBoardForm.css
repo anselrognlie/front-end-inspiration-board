@@ -1,0 +1,4 @@
+.NewBoardForm input.invalid {
+    border-color: red;
+    box-shadow: 0 0 7px red;
+}
