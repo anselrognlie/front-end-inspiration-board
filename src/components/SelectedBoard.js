@@ -1,6 +1,7 @@
 import React from 'react';
 import BoardShape from '../types/BoardShape';
 import Board from './Board';
+import './SelectedBoard.css';
 
 const SelectedBoard = ({ board }) => {
     const showBoard = !!board;

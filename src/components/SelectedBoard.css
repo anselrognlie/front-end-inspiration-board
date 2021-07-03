@@ -1,0 +1,25 @@
+.SelectedBoard {
+    align-self: flex-end;
+}
+
+.SelectedBoard > p, .SelectedBoard span {
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1em;
+    vertical-align: bottom;
+    position: relative;
+    top: 1.25em;
+}
+
+.SelectedBoard span {
+    padding: .25em 0;
+}
+
+.SelectedBoard > p {
+    position: initial;
+}
+
+.SelectedBoard .Board {
+    display: flex;
+    flex-direction: column;
+}

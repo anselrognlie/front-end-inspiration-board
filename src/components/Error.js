@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Error.css'
 
 const Error = ({ message }) => {
     const showMessage = message && message.length > 0;
 
-    return (
+    return showMessage && (
         <div className="Error">
-            { showMessage && <p>{ message }</p> }
+            <p>{ message }</p> 
         </div>
     );
 };

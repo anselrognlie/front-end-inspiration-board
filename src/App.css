@@ -1,2 +1,12 @@
 .App {
 }
+
+.board-bits {
+    display: grid;
+    grid-template-columns: 33% 1fr 33%;
+    /* margin: 2em; */
+}
+
+h1 {
+    margin-left: 1em;
+}

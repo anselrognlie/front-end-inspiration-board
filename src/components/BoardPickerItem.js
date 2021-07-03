@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BoardShape from '../types/BoardShape';
+import './BoardPickerItem.css';
 
 const BoardPickerItem = ({ board, onPick }) => {
 

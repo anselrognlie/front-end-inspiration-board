@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardShape from '../types/CardShape';
 import Card from './Card';
+import './CardList.css';
 
 const CardList = ({ cards, ...rest }) => {
     const showCards = cards.length > 0;

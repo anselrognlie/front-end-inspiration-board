@@ -1,0 +1,8 @@
+.SortPicker {
+    margin: 2em 0 0 2em;
+}
+
+.SortPicker > select {
+    border: solid 1px black;
+    border-radius: 5px;
+}

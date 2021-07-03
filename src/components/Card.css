@@ -1,0 +1,64 @@
+.Card {
+    --card-color: rgb(255, 233, 233);
+    --card-color-fade: rgba(255, 233, 233, 0);
+    width: 15em;
+    height: 15em;
+    background-color: var(--card-color);
+    border-radius: 5px;
+    margin: 2em;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    box-shadow: -10px 7px 7px lightgrey;
+    border: solid 1px pink;
+}
+
+.Card .message {
+    position: relative;
+    overflow: hidden;
+    height: 12.1rem;
+    font-size: 1.4em;
+    line-height: 1.35em;
+    padding: .5em;
+}
+
+.Card .message::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0; /* "right" */
+    inset-inline-end: 0; /* "right" */
+    width: 100%;
+    height: 1.35em;
+    background: linear-gradient(to right, var(--card-color-fade), var(--card-color) 100%);
+}
+
+.Card > .controls {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1em;
+    margin: .75em;
+}
+
+.Card > .controls > p:hover {
+    cursor: default;
+}
+
+.Card > .controls > p {
+    vertical-align: bottom;
+    user-select: none;
+}
+
+.Card > .controls > p:nth-of-type(2) {
+    --color: rgb(165, 108, 42);
+    color: gold;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-shadow:
+        -0.5px -0.5px var(--color),
+        0.5px -0.5px var(--color),
+        -0.5px 0.5px var(--color),
+        0.5px 0.5px var(--color),
+        -0.5px 0px var(--color),
+        0.5px 0px var(--color),
+        0px 0.5px var(--color),
+        0px -0.5px var(--color);
+}

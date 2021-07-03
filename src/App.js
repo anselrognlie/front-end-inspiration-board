@@ -6,18 +6,46 @@ import SelectedBoard from './components/SelectedBoard';
 import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
 import CardList from './components/CardList';
+import SortPicker from './components/SortPicker';
 import Error from './components/Error';
 import axios from 'axios';
+
+const sortOptions = [
+    { value: "", display: "None" },
+    { value: "message-asc", display: "Alphabetically (A-Z)" },
+    { value: "message-desc", display: "Alphabetically (Z-A)" },
+    { value: "likes-asc", display: "Likes (Increasing)" },
+    { value: "likes-desc", display: "Likes (Decreasing)" },
+];
+
+const defaultSort = '';
+let errorCleared = false;
 
 const App = ({baseUrl}) => {
     const [boards, setBoards] = useState([]);
     const [cards, setCards] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [selectedBoard, setSelectedBoard] = useState(null);
+    const [sortBy, setSortBy] = useState(defaultSort);
+    errorCleared = false;
 
     const clearError = () => {
-        setErrorMessage('');
+        // only clear once per render
+        if (! errorCleared) {
+            setErrorMessage('');
+        }
+
+        errorCleared = true;
     };
+
+    const errorHandler = (error) => {
+        console.log({ error });
+        setErrorMessage(error.message);
+    }
+
+    const changeSort = (option) => {
+        setSortBy(option);
+    }
 
     const upvoteCard = (card) => {
         clearError();
@@ -26,10 +54,7 @@ const App = ({baseUrl}) => {
         .then(() => {
             refreshCards();
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
+        .catch(errorHandler);
     };
 
     const deleteCard = (card) => {
@@ -39,30 +64,24 @@ const App = ({baseUrl}) => {
         .then(() => {
             refreshCards();
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
+        .catch(errorHandler);
     };
 
     const refreshCards = useCallback(() => {
+        clearError();
+
         if (! selectedBoard) {
             setCards([]);
             return Promise.resolve();
         }
 
-        clearError();
-
-        return axios.get(`${baseUrl}/boards/${selectedBoard.id}/cards`)
+        return axios.get(`${baseUrl}/boards/${selectedBoard.id}/cards?sort=${sortBy}`)
         .then(response => {
             const cards = response.data;
             setCards(cards);
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
-    }, [baseUrl, selectedBoard]);
+        .catch(errorHandler);
+    }, [baseUrl, selectedBoard, sortBy]);
 
     const createCard = (card) => {
         if (! selectedBoard) { return; }
@@ -73,10 +92,7 @@ const App = ({baseUrl}) => {
         .then(() => {
             return refreshCards();
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
+        .catch(errorHandler);
     };
 
     const refreshBoards = useCallback(() => {
@@ -87,10 +103,7 @@ const App = ({baseUrl}) => {
             const boards = response.data;
             setBoards(boards);
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
+        .catch(errorHandler);
     }, [baseUrl]);
 
     const createBoard = (board) => {
@@ -100,10 +113,7 @@ const App = ({baseUrl}) => {
         .then(() => {
             return refreshBoards();
         })
-        .catch(error => {
-            console.log({ error });
-            setErrorMessage(error.message);
-        });
+        .catch(errorHandler);
     };
 
     const onBoardClicked = (board) => {
@@ -116,20 +126,26 @@ const App = ({baseUrl}) => {
 
     useEffect(() => {
         refreshCards();
-    }, [refreshCards, selectedBoard]);
+    }, [refreshCards, selectedBoard, sortBy]);
 
     const hasBoard = !!selectedBoard;
 
     return (
         <div className="App">
             <Error message={errorMessage} />
-            <BoardPicker boards={boards} onPick={onBoardClicked} />
-            <SelectedBoard board={selectedBoard} />
-            <NewBoardForm createBoardHandler={createBoard} />
+            <div className="board-bits">
+                <div>
+                    <h1>Inspiration Board</h1>
+                    <BoardPicker boards={boards} selectedBoard={selectedBoard} onPick={onBoardClicked} />
+                </div>
+                <SelectedBoard board={selectedBoard} />
+                <NewBoardForm createBoardHandler={createBoard} />
+            </div>
             { hasBoard && ( 
                 <>
-                <CardList cards={cards} upvoteHandler={upvoteCard} deleteHandler={deleteCard} />
+                <SortPicker options={sortOptions} current={sortBy} onSortChanged={changeSort} />
                 <NewCardForm createCardHandler={createCard} />
+                <CardList cards={cards} upvoteHandler={upvoteCard} deleteHandler={deleteCard} />
                 </>
             )}
         </div>

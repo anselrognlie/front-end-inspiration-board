@@ -11,7 +11,7 @@ const defaultFormData = () => ({
 });
 
 const NewBoardForm = ({ createBoardHandler }) => {
-    const [isVisible, setVisible] = useState(true);
+    const [isVisible, setVisible] = useState(false);
     const [formData, setFormData] = useState(defaultFormData);
 
     const toggleVisibility = () => {
@@ -69,30 +69,32 @@ const NewBoardForm = ({ createBoardHandler }) => {
         <div className="NewBoardForm">
             { isVisible ? (
                 <>
+                <button className="hide" onClick={toggleVisibility}>Hide New Board Form</button>
                 <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="title">Title:</label>
                     <input
                         name="title"
+                        type="text"
                         value={formData.title}
                         className={getClassName('title')}
                         onChange={makeChangeHandlerFor('title')} />
-                </div>
-                <div>
-                    <label htmlFor="owner">Owner&apos;s Name:</label>
+                    <label htmlFor="owner">Owner&apos;s&nbsp;Name:</label>
                     <input 
                         name="owner" 
+                        type="text"
                         value={formData.owner}
                         className={getClassName('owner')}
                         onChange={makeChangeHandlerFor('owner')} />
                 </div>
-                <p>Preview: <Board {...formData} /></p>
-                <input type="submit" {...makeSubmitProps()}></input>
+                <p><span>Preview: <Board {...formData} /></span></p>
+                <span className="trailingButton">
+                    <input type="submit" {...makeSubmitProps()}></input>
+                </span>
                 </form>
-                <button onClick={toggleVisibility}>Hide New Board Form</button>
                 </>
             ) : (
-                <button onClick={toggleVisibility}>Show New Board Form</button>
+                <button className="show" onClick={toggleVisibility}>Show New Board Form</button>
             )}
         </div>
     );

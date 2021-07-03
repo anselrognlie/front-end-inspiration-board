@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardShape from '../types/CardShape';
+import './Card.css';
 
 const Card = ({ card, upvoteHandler, deleteHandler }) => {
     return (
         <div className="Card">
-            <p>{ card.message }</p>
-            <p>{ card.like_count }</p>
-            <p onClick={() => upvoteHandler(card)}>+1</p>
-            <p onClick={() => deleteHandler(card)}>Delete</p>
+            <div>
+                <p className="message">{ card.message }</p>
+            </div>
+            <div className="controls">
+                <p>{ card.like_count }💕</p>
+                <p onClick={() => upvoteHandler(card)}>+1</p>
+                <p onClick={() => deleteHandler(card)}>🗑</p>
+            </div>
         </div>
     );
 };

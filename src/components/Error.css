@@ -1,0 +1,17 @@
+.Error {
+    min-height: 3em;
+    border: solid 3px red;
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: rgb(255, 228, 233);
+}
+
+.Error p {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}

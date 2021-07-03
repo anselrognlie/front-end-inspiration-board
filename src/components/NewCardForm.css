@@ -1,4 +1,49 @@
-.NewCardForm input.invalid {
-    border-color: red;
+.NewCardForm {
+    --card-color: rgb(255, 233, 233);
+    width: 15em;
+    height: 15em;
+    background-color: var(--card-color);
+    border-radius: 5px;
+    padding: 1em;
+    margin: 2em;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    box-shadow: -10px 7px 7px lightgrey;
+    border: solid 1px pink;
+}
+
+.NewCardForm {
+    position: absolute;
+}
+
+.NewCardForm form {
+    display: grid;
+    grid-template-rows: 1fr min-content;
+}
+
+.NewCardForm form div:nth-of-type(1) {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+}
+
+.NewCardForm input[type="text"], .NewCardForm textarea {
+    margin-bottom: .5em;
+    word-wrap: break-word;
+    vertical-align: top;
+    line-height: 1em;
+}
+
+.NewCardForm form div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    height: 1em;
+}
+
+.NewCardForm input.invalid, .NewCardForm textarea.invalid {
+    border-color: pink;
     box-shadow: 0 0 7px red;
+}
+
+.NewCardForm label {
+    display: block;
 }

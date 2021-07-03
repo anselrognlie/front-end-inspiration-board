@@ -8,25 +8,32 @@ const defaultFormData = () => ({
 });
 
 const NewCardForm = ({ createCardHandler }) => {
-    const [isVisible, setVisible] = useState(true);
+    const [isVisible, setVisible] = useState(false);
     const [formData, setFormData] = useState(defaultFormData);
 
-    const toggleVisibility = () => {
+    const toggleVisibility = (event) => {
+        event.preventDefault();
+
         setVisible((visible) => {
             return ! visible;
         });
     };
 
-    const onSubmit = (event) => {
-        event.preventDefault();
+    const submitMessage = () => {
+        const message = formData.message.trim();
+        
+        if (message.length === 0) { return; }
 
-        const cardData = {
-            message: formData.message.trim(),
-        };
+        const cardData = { message };
 
         setFormData(defaultFormData());
 
         createCardHandler(cardData);
+    };
+
+    const onSubmit = event => {
+        event.preventDefault();
+        submitMessage();
     };
 
     const makeValidName = (name) => `${name}Valid`;
@@ -61,6 +68,13 @@ const NewCardForm = ({ createCardHandler }) => {
         return formData[validName] ? 'valid' : 'invalid';
     };
 
+    const areaKeyHandler = event => {
+        if (event.which === 13) {
+            event.preventDefault();
+            submitMessage();
+        }
+    };
+
     return (
         <div className="NewCardForm">
             { isVisible ? (
@@ -68,15 +82,21 @@ const NewCardForm = ({ createCardHandler }) => {
                 <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="message">Message:</label>
-                    <input
+                    <textarea
+                        wrap="soft"
+                        type="text"
                         name="message"
+                        multiline="true"
                         value={formData.message}
                         className={getClassName('message')}
+                        onKeyPress={areaKeyHandler}
                         onChange={makeChangeHandlerFor('message')} />
                 </div>
+                <div>
                 <input type="submit" {...makeSubmitProps()}></input>
-                </form>
                 <button onClick={toggleVisibility}>Hide New Card Form</button>
+                </div>
+                </form>
                 </>
             ) : (
                 <button onClick={toggleVisibility}>Show New Card Form</button>

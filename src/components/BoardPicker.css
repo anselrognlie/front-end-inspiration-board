@@ -1,0 +1,30 @@
+.BoardPicker {
+    height: 7.5em;
+    overflow: hidden;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: white;
+    margin: 0 2em;
+}
+
+.BoardPicker > div {
+    height: 7.5em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.BoardPicker > div > ul {
+    display: block;
+}
+
+.BoardPicker li {
+    overflow: hidden;
+    display: block;
+    padding-top: .35em;
+    line-height: 1.5em;
+    padding-left: .25em;
+}
+
+.BoardPicker li.selectedBoard {
+    background-color: pink;
+}

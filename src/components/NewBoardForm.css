@@ -1,4 +1,58 @@
+.NewBoardForm {
+    /* position: fixed; */
+    padding: 0 2em;
+    /* max-height: 10.9em; */
+    overflow: hidden;
+}
+
+.NewBoardForm p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.NewBoardForm .fullTitle::after {
+    content: " - ";
+}
+
+.NewBoardForm input[type="text"] {
+    width: 100%;
+}
+
+.NewBoardForm input[type="submit"] {
+    margin-top: 1em;
+}
+
 .NewBoardForm input.invalid {
-    border-color: red;
+    border-color: pink;
     box-shadow: 0 0 7px red;
+}
+
+.NewBoardForm .trailingButton {
+    position: absolute;
+    /* top: 0px; */
+    /* left: 3em; */
+}
+
+.NewBoardForm div {
+    display: grid;
+    margin: 1em 0;
+    grid-template-columns: min-content minmax(5em, 1fr);
+    grid-gap: 1em;
+}
+
+.NewBoardForm .trailingButton input {
+    position: relative;
+    top: -175px;
+    left: 130px;
+}
+
+.NewBoardForm button.hide::before {
+    content: "▼ ";
+    font-size: .75em;
+}
+
+.NewBoardForm button.show::before {
+    content: "▶︎ ";
+    font-size: .75em;
 }
