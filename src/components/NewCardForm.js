@@ -93,7 +93,7 @@ const NewCardForm = ({ createCardHandler }) => {
                         onChange={makeChangeHandlerFor('message')} />
                 </div>
                 <div>
-                <input type="submit" {...makeSubmitProps()}></input>
+                <input type="submit" value="Submit" {...makeSubmitProps()}></input>
                 <button onClick={toggleVisibility}>Hide New Card Form</button>
                 </div>
                 </form>

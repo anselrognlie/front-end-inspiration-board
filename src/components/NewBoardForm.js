@@ -89,7 +89,7 @@ const NewBoardForm = ({ createBoardHandler }) => {
                 </div>
                 <p><span>Preview: <Board {...formData} /></span></p>
                 <span className="trailingButton">
-                    <input type="submit" {...makeSubmitProps()}></input>
+                    <input type="submit" value="Submit" {...makeSubmitProps()}></input>
                 </span>
                 </form>
                 </>
