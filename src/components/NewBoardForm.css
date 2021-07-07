@@ -16,6 +16,10 @@
     content: " - ";
 }
 
+.NewBoardForm input, .NewBoardForm button {
+    font-size: .85em;
+}
+
 .NewBoardForm input[type="text"] {
     width: 100%;
 }
