@@ -7,6 +7,7 @@
     line-height: var(--lh);
     font-size: var(--fs);
     overflow: hidden;
+    margin: 0 2em;
 }
 
 .NewBoardForm * {
@@ -17,6 +18,7 @@
 .NewBoardForm p {
     text-overflow: ellipsis;
     overflow: hidden;
+    height: calc(var(--lh)*1.5);
     white-space: nowrap;
 }
 
@@ -32,7 +34,8 @@
 
 .NewBoardForm input[type="text"] {
     width: 100%;
-    font-size: var(--lh);
+    font-size: var(--fs);
+    height: calc(var(--lh)*1.5);
 }
 
 .NewBoardForm input.invalid {
@@ -56,8 +59,9 @@
 
 .NewBoardForm .trailingButton input {
     position: relative;
-    top: -169px;
-    left: 150px;
+    top: -148px;
+    /* top: -169px; */
+    left: 155px;
 }
 
 .NewBoardForm button.hide::before {
